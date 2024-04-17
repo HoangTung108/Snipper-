@@ -7,9 +7,7 @@ public class Shoot : MonoBehaviour
     public Rigidbody rb;
     public float speed ;
     
-  
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         Physics.gravity *= 1f;
@@ -36,11 +34,14 @@ public class Shoot : MonoBehaviour
     }
     void OnCollisionEnter(Collision other ){
         if (other.gameObject.tag == "Enemy"){
-            
             StartCoroutine(destroy(other.gameObject,0.75f));
-
             StartCoroutine(destroy(gameObject,1f));
+            Movement.isCollide = true;
             
+        }
+        else if (other.gameObject.tag == "Boss"){
+            StartCoroutine(destroy(other.gameObject,0.75f));
+            StartCoroutine(destroy(gameObject,1f));
         }
     
             Movement.isCollide = true;

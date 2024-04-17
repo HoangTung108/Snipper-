@@ -36,16 +36,18 @@ public class Movement : MonoBehaviour
     private bool CanDo;
  
 
-    // Start is called before the first frame update
-    void Start(){  
+    void Awake(){  
         HideNPC(listobj, false);
         HideNPC(listNPC, false);
         rb = GetComponent<Rigidbody>();
         BulletCout =1;
         Physics.gravity *= 10f;
         text.text = string.Empty;
-        StartCoroutine(Show(listContent[0]));
         CanDo =false;
+    }
+    
+    void Start(){
+        StartCoroutine(Show(listContent[0]));
     }
 
     // Update is called once per frame
@@ -156,7 +158,10 @@ public class Movement : MonoBehaviour
         if (isCollide && BulletCout <1){
             LoseUI.SetActive(true);
             PointUI.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale =0f;
+            
         }
     }
     IEnumerator wait(float Delay,bool check, GameObject obj ){
