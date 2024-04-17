@@ -41,13 +41,13 @@ public class Shoot : MonoBehaviour
         }
         else if (other.gameObject.tag == "Boss"){
             StartCoroutine(destroy(other.gameObject,0.75f));
+            Movement.WINUI.SetActive(true);
             StartCoroutine(destroy(gameObject,1f));
+
         }
     
             Movement.isCollide = true;
-            StartCoroutine(destroy(gameObject,1f));
-            
-        
+            StartCoroutine(destroy(gameObject,1f));   
     }
     IEnumerator destroy(GameObject obj,float delay){
         yield return new WaitForSeconds(delay);

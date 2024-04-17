@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     public GameObject gun;
     public GameObject bullet;
     public GameObject LoseUI;
+    public static GameObject WINUI;
     public GameObject PointUI;
     public Transform pointBullet;
     public GameObject UI;

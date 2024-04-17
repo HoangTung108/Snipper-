@@ -7,7 +7,10 @@ public class Control : MonoBehaviour
 {
     public Animator animate;
     public GameObject ButtonStart;
-     public GameObject ButtonQuit;
+    public GameObject ButtonQuit;
+    void Awake(){
+        animate.SetBool("isTransition",false);
+    }
     public void ReloadScene(){
         Resources.UnloadUnusedAssets();
         StartCoroutine(LoadSceneAsync("Menu"));
