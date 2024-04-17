@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class Control : MonoBehaviour
 {
     public Animator animate;
-    public GameObject Button;
+    public GameObject ButtonStart;
+     public GameObject ButtonQuit;
     public void ReloadScene(){
         Resources.UnloadUnusedAssets();
         StartCoroutine(LoadSceneAsync("Menu"));
@@ -15,12 +16,21 @@ public class Control : MonoBehaviour
     private IEnumerator LoadSceneAsync(string name){
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(name);
         while (!asyncLoad.isDone){
+            float proress = Mathf.Clamp01(asyncLoad.progress/0.9f);
+            if (asyncLoad.progress >=0.9f){
+                asyncLoad.allowSceneActivation = true;
+            }
             yield return null;
         }
     }
     public void OnStart(){
         animate.SetBool("isTransition",true);
-        // StartCoroutine(LoadSceneAsync("GamePlay"));
+        ButtonQuit.SetActive(false);
+        ButtonStart.SetActive(false);
+        Invoke("ChageScene",2f);
+    }
+    void ChageScene(){
+           StartCoroutine(LoadSceneAsync("GamePlay"));
     }
     public void Quit(){
         Application.Quit();
