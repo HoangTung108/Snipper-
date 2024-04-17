@@ -6,13 +6,15 @@ public class Shoot : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed ;
-  
+    
   
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Physics.gravity *= 1f;
+        Movement.isCollide = false;
+       
     }
 
     // Update is called once per frame
@@ -34,13 +36,17 @@ public class Shoot : MonoBehaviour
     }
     void OnCollisionEnter(Collision other ){
         if (other.gameObject.tag == "Enemy"){
-            Debug.Log("true");
+            
             StartCoroutine(destroy(other.gameObject,0.75f));
+
             StartCoroutine(destroy(gameObject,1f));
+            
         }
-        if (other.gameObject.tag == "Default"){
+    
+            Movement.isCollide = true;
             StartCoroutine(destroy(gameObject,1f));
-        }
+            
+        
     }
     IEnumerator destroy(GameObject obj,float delay){
         yield return new WaitForSeconds(delay);

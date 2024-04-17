@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
+    public static bool isCollide;
     public float speed;
     public Animator animate;
     public GameObject scope;
     public GameObject gun;
     public GameObject bullet;
+    public GameObject LoseUI;
+    public GameObject PointUI;
     public Transform pointBullet;
     public List <GameObject> listobj;
     public List <GameObject> listNPC;
@@ -30,6 +33,7 @@ public class Movement : MonoBehaviour
      "Good luck !!!"};
      private  int i =0;
     private bool nextText;
+    private bool CanDo;
  
 
     // Start is called before the first frame update
@@ -41,13 +45,17 @@ public class Movement : MonoBehaviour
         Physics.gravity *= 10f;
         text.text = string.Empty;
         StartCoroutine(Show(listContent[0]));
+        CanDo =false;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        ControlMovement();
+    {   
+        if (CanDo){
+            ControlMovement();
+        }
         ShowText();
+        Lose();
         
     }
     void ControlMovement(){
@@ -134,6 +142,7 @@ public class Movement : MonoBehaviour
                 StartCoroutine(Show(listContent[i]));
             }
             else{
+                CanDo = true;
                 HideNPC(listobj, true);
                 foreach (GameObject t in listNPC){
                      StartCoroutine(wait(8f,true,t) );
@@ -142,6 +151,13 @@ public class Movement : MonoBehaviour
             }
            nextText = false;
         }  
+    }
+    void Lose(){
+        if (isCollide && BulletCout <1){
+            LoseUI.SetActive(true);
+            PointUI.SetActive(false);
+            Time.timeScale =0f;
+        }
     }
     IEnumerator wait(float Delay,bool check, GameObject obj ){
         yield return new WaitForSeconds(Delay);
