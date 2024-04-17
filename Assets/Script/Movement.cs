@@ -22,14 +22,18 @@ public class Movement : MonoBehaviour
     private  Vector3 cameraForward ;
     private  Vector3 cameraRight ;
     public Rigidbody rb;
-    private  string[] listContent = {"Listen!!!", "You have to complete the mission"};
-    private bool NextText;
-       
+    private  string[] listContent =  {"Listen here 319 !!!" ,"I have an extremely important mission.", 
+    "In just a few minutes, the presidential candidate's car will arrive.", 
+    "I can only stand on this high-rise building and aim at his position.",
+    "You only have one bullet to finish him off,",
+    "Use it accurately to complete this mission before he participates in the election,",
+     "Good luck !!!"};
+     private  int i =0;
+    private bool nextText;
  
 
     // Start is called before the first frame update
-    void Start()
-    {   NextText = false;
+    void Start(){  
         HideNPC(listobj, false);
         HideNPC(listNPC, false);
         rb = GetComponent<Rigidbody>();
@@ -121,14 +125,23 @@ public class Movement : MonoBehaviour
         }
     }
     void ShowText(){
-        int i =0;
-        if (Input.GetMouseButtonDown(0) && NextText){
-            text.text = string.Empty;
-            NextText =false;
-            i++;
-            StartCoroutine(Show(listContent[i]));
+       
+        if (Input.GetMouseButtonDown(0) && nextText){
+            i +=1;
 
-        }
+            text.text = string.Empty;
+            if (i < listContent.Length){
+                StartCoroutine(Show(listContent[i]));
+            }
+            else{
+                HideNPC(listobj, true);
+                foreach (GameObject t in listNPC){
+                     StartCoroutine(wait(8f,true,t) );
+                }
+               
+            }
+           nextText = false;
+        }  
     }
     IEnumerator wait(float Delay,bool check, GameObject obj ){
         yield return new WaitForSeconds(Delay);
@@ -139,7 +152,7 @@ public class Movement : MonoBehaviour
             text.text += Char;
             yield return new WaitForSeconds(0.1f);
         }
-        NextText = true;
+        nextText =true;
     }
     
 }
