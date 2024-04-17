@@ -17,18 +17,14 @@ public class Movement : MonoBehaviour
     private bool GunShoot;
     private  Vector3 cameraForward ;
     private  Vector3 cameraRight ;
-
-    public float moveSpeed; // Tốc độ di chuyển của nhân vật
     public Rigidbody rb;
-    private Camera mainCamera;
+ 
 
     // Start is called before the first frame update
     void Start()
     {
-          // Lấy tham chiếu đến Rigidbody của nhân vật
+     
         rb = GetComponent<Rigidbody>();
-        // Lấy tham chiếu đến Camera chính
-        mainCamera = Camera.main; 
         BulletCout =1;
         Physics.gravity *= 10f;
     }
