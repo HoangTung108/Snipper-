@@ -30,7 +30,7 @@ public class Control : MonoBehaviour
         animate.SetBool("isTransition",true);
         ButtonQuit.SetActive(false);
         ButtonStart.SetActive(false);
-        Invoke("ChageScene",2f);
+        Invoke("ChageScene",4f);
     }
     void ChageScene(){
            StartCoroutine(LoadSceneAsync("GamePlay"));

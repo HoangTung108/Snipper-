@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
     public static GameObject WINUI;
     public GameObject PointUI;
     public Transform pointBullet;
-    public GameObject UI;
     public List <GameObject> listobj;
     public List <GameObject> listNPC;
     public Text text;
@@ -42,15 +41,15 @@ public class Movement : MonoBehaviour
         HideNPC(listobj, false);
         HideNPC(listNPC, false);
         rb = GetComponent<Rigidbody>();
-        BulletCout =1;
         Physics.gravity *= 10f;
         text.text = string.Empty;
         CanDo =false;
-        Destroy(UI);
+       
     }
 
     void Start(){
         StartCoroutine(Show(listContent[0]));
+         BulletCout =1;
     }
 
     // Update is called once per frame
