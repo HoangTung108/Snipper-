@@ -29,4 +29,18 @@ public class Shoot : MonoBehaviour
         rb.AddForce(CameraForward*speed, ForceMode.Impulse);
         // rb.velocity = CameraForward*speed *Time.deltaTime;
     }
+    void OnCollisionEnter(Collision other ){
+        if (other.gameObject.tag == "Enemy"){
+            Debug.Log("true");
+            StartCoroutine(destroy(other.gameObject,0.75f));
+            StartCoroutine(destroy(gameObject,1f));
+        }
+        if (other.gameObject.tag == "Default"){
+            StartCoroutine(destroy(gameObject,1f));
+        }
+    }
+    IEnumerator destroy(GameObject obj,float delay){
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
+    }
 }

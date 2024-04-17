@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     {
      
         rb = GetComponent<Rigidbody>();
-        BulletCout =1;
+        BulletCout =1500000;
         Physics.gravity *= 10f;
     }
 
@@ -89,10 +89,10 @@ public class Movement : MonoBehaviour
     }
     void Shoot(){
             Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = 1f; 
+            mousePosition.z = 2f; 
             Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(mousePosition);
             Vector3 cameraDirection = Camera.main.transform.forward;
-            spawnPosition.y += cameraDirection.y+0.5f;
+            spawnPosition.y += cameraDirection.y-0.75f;
             Instantiate(bullet, spawnPosition, pointBullet.rotation);
 
     }

@@ -29,9 +29,10 @@ public class CameraRotate : MonoBehaviour
         MouseY = Input.GetAxis ("Mouse Y") * SenY * Time.deltaTime;
         yRotation += MouseX;
         xRotation -=MouseY;
-        xRotation = Mathf.Clamp (xRotation , -60f, 30f);
+        xRotation = Mathf.Clamp (xRotation , -80f, 20f);
         transform.rotation = Quaternion.Euler (xRotation,yRotation,0);
         player.rotation = Quaternion.Euler (0,yRotation,0);
         pointShoot.rotation = Quaternion.Euler(0,yRotation,0);
+
     }
 }
