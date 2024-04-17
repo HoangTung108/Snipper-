@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     {
      
         rb = GetComponent<Rigidbody>();
-        BulletCout =1500000;
+        BulletCout =1;
         Physics.gravity *= 10f;
     }
 
