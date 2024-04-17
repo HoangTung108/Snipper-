@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     public GameObject LoseUI;
     public GameObject PointUI;
     public Transform pointBullet;
+    public GameObject UI;
     public List <GameObject> listobj;
     public List <GameObject> listNPC;
     public Text text;
@@ -44,8 +45,9 @@ public class Movement : MonoBehaviour
         Physics.gravity *= 10f;
         text.text = string.Empty;
         CanDo =false;
+        Destroy(UI);
     }
-    
+
     void Start(){
         StartCoroutine(Show(listContent[0]));
     }
