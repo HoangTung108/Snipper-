@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Movement : MonoBehaviour
     public GameObject gun;
     public GameObject bullet;
     public Transform pointBullet;
+    public List <GameObject> listobj;
+    public List <GameObject> listNPC;
+    public Text text;
     public float zoomSpeed;
     private int BulletCout;
     private bool isWalk;
@@ -18,21 +22,28 @@ public class Movement : MonoBehaviour
     private  Vector3 cameraForward ;
     private  Vector3 cameraRight ;
     public Rigidbody rb;
+    private  string[] listContent = {"Listen!!!", "You have to complete the mission"};
+    private bool NextText;
+       
  
 
     // Start is called before the first frame update
     void Start()
-    {
-     
+    {   NextText = false;
+        HideNPC(listobj, false);
+        HideNPC(listNPC, false);
         rb = GetComponent<Rigidbody>();
         BulletCout =1;
         Physics.gravity *= 10f;
+        text.text = string.Empty;
+        StartCoroutine(Show(listContent[0]));
     }
 
     // Update is called once per frame
     void Update()
     {
         ControlMovement();
+        ShowText();
         
     }
     void ControlMovement(){
@@ -96,10 +107,6 @@ public class Movement : MonoBehaviour
             Instantiate(bullet, spawnPosition, pointBullet.rotation);
 
     }
-    IEnumerator wait(float Delay,bool check, GameObject obj ){
-        yield return new WaitForSeconds(Delay);
-        obj.SetActive(check);
-    }
     void RunAnimate(){
         if (isWalk){
             animate.SetBool("isWalking",true);
@@ -107,6 +114,32 @@ public class Movement : MonoBehaviour
         else{
             animate.SetBool("isWalking", false);
         }
+    }
+    void HideNPC(List<GameObject> lst, bool check){
+        foreach (GameObject i in lst){
+            i.SetActive(check);
+        }
+    }
+    void ShowText(){
+        int i =0;
+        if (Input.GetMouseButtonDown(0) && NextText){
+            text.text = string.Empty;
+            NextText =false;
+            i++;
+            StartCoroutine(Show(listContent[i]));
+
+        }
+    }
+    IEnumerator wait(float Delay,bool check, GameObject obj ){
+        yield return new WaitForSeconds(Delay);
+        obj.SetActive(check);
+    }
+    IEnumerator Show (string content){
+        foreach (char Char in content.ToCharArray()){
+            text.text += Char;
+            yield return new WaitForSeconds(0.1f);
+        }
+        NextText = true;
     }
     
 }
