@@ -83,7 +83,7 @@ public class Movement : MonoBehaviour
         if (Input.mouseScrollDelta.y != 0 && CanShoot){
                 float scroll = Input.mouseScrollDelta.y;
                 Camera.main.fieldOfView += -scroll * zoomSpeed * Time.deltaTime;
-                Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 20f, 60f);
+                Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 10f, 60f);
             }
      
     }
