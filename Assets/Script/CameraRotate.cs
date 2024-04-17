@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraRotate : MonoBehaviour
 {
     public Transform pointShoot;
+    public Transform player;
     public float SenX;
     public float SenY;
     private float MouseX;
@@ -14,7 +15,8 @@ public class CameraRotate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class CameraRotate : MonoBehaviour
         xRotation -=MouseY;
         xRotation = Mathf.Clamp (xRotation , -60f, 30f);
         transform.rotation = Quaternion.Euler (xRotation,yRotation,0);
+        player.rotation = Quaternion.Euler (0,yRotation,0);
         pointShoot.rotation = Quaternion.Euler(0,yRotation,0);
     }
 }
