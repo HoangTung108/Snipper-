@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
+    public AuidoSource back;
     public static bool isCollide;
     public float speed;
     public Animator animate;
@@ -41,6 +42,7 @@ public class Movement : MonoBehaviour
         HideNPC(listobj, false);
         HideNPC(listNPC, false);
         rb = GetComponent<Rigidbody>();
+        back = GetComponent<AudioSource>();
         Physics.gravity *= 10f;
         text.text = string.Empty;
         CanDo =false;
@@ -50,6 +52,7 @@ public class Movement : MonoBehaviour
     void Start(){
         StartCoroutine(Show(listContent[0]));
          BulletCout =1;
+         bcak.Play(Play);
     }
 
     // Update is called once per frame
