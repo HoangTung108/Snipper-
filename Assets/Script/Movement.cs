@@ -59,7 +59,8 @@ public class Movement : MonoBehaviour
             ControlMovement();
         }
         ShowText();
-        Lose();
+        Invoke("lose",2f);
+      
         
     }
     void ControlMovement(){
