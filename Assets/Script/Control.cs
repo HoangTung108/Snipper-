@@ -8,12 +8,13 @@ public class Control : MonoBehaviour
     public Animator animate;
     public GameObject ButtonStart;
     public GameObject ButtonQuit;
-    void Awake(){
+    void Start(){
         animate.SetBool("isTransition",false);
     }
     public void ReloadScene(){
         Resources.UnloadUnusedAssets();
-        StartCoroutine(LoadSceneAsync("Menu"));
+        // StartCoroutine(LoadSceneAsync("Menu"));
+        SceneManager.LoadScene("Menu");
        
     }
     private IEnumerator LoadSceneAsync(string name){
